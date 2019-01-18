@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t peetg/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - npm run peetg/react-test npm run test -- --converage
+
+after_sucess:
+  - docker build -t peetg/multi-client ./client
+  - docker build -t peetg/multi-server ./server
+  - docker build -t peetg/multi-worker ./worker
+  - docker build -t peetg/multi-nginx ./nginx
+  #Log into Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #Upload images to Docker HUB
+  - docker push -t peetg/multi-client
+  - docker push -t peetg/multi-server
+  - docker push -t peetg/multi-worker
+  - docker push -t peetg/multi-nginx
+
+
