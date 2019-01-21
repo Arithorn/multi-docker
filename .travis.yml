@@ -7,7 +7,7 @@ before_install:
 script:
   - docker run peetg/react-test npm test -- --coverage
 
-after_sucess:
+after_success:
   - docker build -t peetg/multi-client ./client
   - docker build -t peetg/multi-server ./server
   - docker build -t peetg/multi-worker ./worker
