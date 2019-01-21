@@ -15,9 +15,9 @@ after_success:
   #Log into Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Upload images to Docker HUB
-  - docker push -t peetg/multi-client
-  - docker push -t peetg/multi-server
-  - docker push -t peetg/multi-worker
-  - docker push -t peetg/multi-nginx
+  - docker push peetg/multi-client
+  - docker push peetg/multi-server
+  - docker push peetg/multi-worker
+  - docker push peetg/multi-nginx
 
 
